@@ -1,7 +1,15 @@
-import express from "express"
+import "express-async-errors";
+import { errorHandler } from "./errors";
+import express from "express";
+import productRouters from "./routes/products.routes";
+import categoryRouters from "./routes/categories.routes";
 
-const app = express()
+const app = express();
+app.use(express.json());
 
-app.use(express.json())
+app.use("/products", productRouters);
+app.use("/categories", categoryRouters);
 
-export default app
+app.use(errorHandler);
+
+export default app;
